@@ -10,13 +10,18 @@ total :: [String] -> [Int]
 total =  map fst . tail . scanl addProduct (0,[]) 
     where
     addProduct :: (Int,[String]) -> String -> (Int,[String]) 
-    addProduct (t,ps) s = (t + findPrice s - reduction s ps, s:ps) 
-    findPrice s = case lookup s fruits of
-        Just p -> p
-        Nothing -> error $ s ++ " ???"
-    reduction :: String -> [String] -> Int
-    reduction "Cerises" ps  = ((*30) . (`mod`2) . length . filter ((==)"Cerises")) ps
-    reduction "Bananes" ps  = ((*150) . (`mod`2) . length . filter ((==)"Bananes")) ps
-    reduction _ _ = 0 
+    addProduct (t,ps) s = (t + findPrice s - reduction s , s:ps) 
+        where
 
-    fruits = [("Pommes",100),("Bananes",150),("Cerises",75)]
+        findPrice s = case lookup s fruits of
+            Just p -> p
+            Nothing -> error $ s ++ " ???"
+
+        reduction :: String -> Int
+        reduction s = case lookup s specials of 
+            Just r -> ((*r) . (`mod`2) . length . filter ((==) s)) ps
+            Nothing -> 0
+
+        fruits = [("Pommes",100),("Bananes",150),("Cerises",75)]
+
+        specials = [("Cerises", 30), ("Bananes", 150)]
