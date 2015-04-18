@@ -3,8 +3,8 @@ module FruitShop
 where
 
 
-process :: [String] -> [String]
-process ss = map show $ total  ss 
+process :: [String] -> [Int]
+process ss = total  ss 
 
 total :: [String] -> [Int]
 total = tail . scanl addProduct 0

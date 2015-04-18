@@ -1,3 +1,3 @@
 import FruitShop
 
-main = interact (unlines . process . lines)
+main = interact (unlines . map show . process . lines)
