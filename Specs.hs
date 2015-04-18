@@ -13,6 +13,8 @@ main = hspec $ do
             process [p,c] `shouldBe` [100,175]
 
         it "should allow for reductions" $ do
-            process [p,c,c] `shouldBe` [100,175,230]
-            process [c,c,c,c] `shouldBe` [75,130,205,260]
-            process [c,p,c,b,c,c,p] `shouldBe` [75,175,230,380,455,510,610]
+            process [p,c,c] `shouldBe` [100,175,220]
+            process [c,c,c,c] `shouldBe` [75,120,195,240]
+            process [c,p,c,b,c,c,p] `shouldBe` [75,175,220,370,445,490,590]
+            process [b,b] `shouldBe` [150,150]
+            process [c,p,c,b,p,b,c] `shouldBe` [75,175,220,370,470,470,545]

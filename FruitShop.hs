@@ -15,7 +15,8 @@ total =  map fst . tail . scanl addProduct (0,[])
         Just p -> p
         Nothing -> error $ s ++ " ???"
     reduction :: String -> [String] -> Int
-    reduction "Cerises" ps  = ((*20) . (`mod`2) . length . filter ((==)"Cerises")) ps
+    reduction "Cerises" ps  = ((*30) . (`mod`2) . length . filter ((==)"Cerises")) ps
+    reduction "Bananes" ps  = ((*150) . (`mod`2) . length . filter ((==)"Bananes")) ps
     reduction _ _ = 0 
 
     fruits = [("Pommes",100),("Bananes",150),("Cerises",75)]
