@@ -22,3 +22,8 @@ main = hspec $ do
         it "should support localization" $ do
             process [c,"Apples",c,b,b] `shouldBe` [75,175,230,380,380]
             process [c,"Apples",c,b,p,"Mele"] `shouldBe` [75,175,230,380,480,580]
+
+        it "should allow for reductions on localized products" $ do
+            process ["Apples","Apples","Apples"] `shouldBe` [100,200,200]
+            process ["Mele","Apples","Apples",p,"Apples","Mele",c,c]
+                `shouldBe` [100,200,300,400,400,450,525,580]
