@@ -1,0 +1,2 @@
+# FruitShopHaskell
+The FruitShop katas
