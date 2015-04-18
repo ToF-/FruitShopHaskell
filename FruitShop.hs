@@ -4,13 +4,13 @@ where
 
 
 process :: [String] -> [String]
-process ss = map show $ total 0 ss 
+process ss = map show $ total  ss 
 
-total :: Int -> [String] -> [Int]
-total n [] = []
-total n (s:ss) = t : total t ss 
-    where 
-    t = n + price s
+total :: [String] -> [Int]
+total = tail . scanl addProduct 0
+    where
+    addProduct :: Int -> String -> Int 
+    addProduct t = (+t) . price
     price s = case lookup s fruits of
         Just p -> p
         Nothing -> error $ s ++ " ???"
