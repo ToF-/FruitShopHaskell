@@ -2,14 +2,17 @@ module FruitShop
 
 where
 
+type Bill    = (Money, [Product])
+type Money   = Int
+type Product = String
 
-process :: [String] -> [Int]
+process :: [Product] -> [Int]
 process ss = total  ss 
 
-total :: [String] -> [Int]
+total :: [Product] -> [Money]
 total =  map fst . tail . scanl addProduct (0,[]) 
     where
-    addProduct :: (Int,[String]) -> String -> (Int,[String]) 
+    addProduct :: Bill -> String -> Bill 
     addProduct (t,ps) s = (t + findPrice s - reduction s , s:ps) 
         where
 
@@ -17,7 +20,7 @@ total =  map fst . tail . scanl addProduct (0,[])
             Just p -> p
             Nothing -> error $ s ++ " ???"
 
-        reduction :: String -> Int
+        reduction :: Product -> Money
         reduction s = case lookup s specials of 
             Just r -> ((*r) . (`mod`2) . length . filter ((==) s)) ps
             Nothing -> 0
